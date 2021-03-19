@@ -1,5 +1,6 @@
 from django.db import models
 
+from phone_field import PhoneField
 
 # Create your models here.
 # Models/tables/classes that the DB will have
@@ -13,3 +14,8 @@ class Experiments(models.Model):
     description = models.CharField(max_length=500)
     status = models.CharField(max_length=30)
     init_date = models.DateField()
+
+
+class Scientist(models.Model):
+    name = models.CharField(max_length=100)
+    phone_numb = PhoneField(blank=True, help_text='Contact phone number')
