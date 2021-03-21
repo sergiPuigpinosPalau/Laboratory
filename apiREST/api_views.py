@@ -111,10 +111,10 @@ def api_experiments_list(request, experiments_pk=None):
 
     # If no experiment has been specified, show all
     if experiments_pk is None:
-        experiments = Experiments.objects.all()
+        experiments = Experiment.objects.all()
     # Else, return information of the specified experiment
     else:
-        experiments = Experiments.objects.filter(pk=experiments_pk)
+        experiments = Experiment.objects.filter(pk=experiments_pk)
         if len(experiments) == 0:
             response = {'error': 'experiment does not exist'}
             return Response(response)

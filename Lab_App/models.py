@@ -10,7 +10,7 @@ from phone_field import PhoneField
 # python manage.py migrate   --  uses function to transform the python table to sql
 # or tools>manage.py
 
-class Experiments(models.Model):
+class Experiment(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=500)
     status = models.CharField(max_length=30)
@@ -23,7 +23,7 @@ class Experiments(models.Model):
 class Scientist(models.Model):
     name = models.CharField(max_length=50)
     phone_numb = PhoneField(blank=True, help_text='Contact phone number')
-    address = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
     email = models.EmailField(max_length=254)
     birth_date = models.DateField()
     position = models.CharField(max_length=30)
@@ -36,8 +36,8 @@ class Article(models.Model):
     title = models.CharField(max_length=50)
     publish_date = models.DateField()
     body = models.TextField(max_length=500)
-    author = models.CharField(max_length=50)
-    experiment = models.ForeignKey(Experiments, null=True, on_delete=models.PROTECT)
+    author = models.ForeignKey(Scientist, null=True, on_delete=models.PROTECT)
+    experiment = models.ForeignKey(Experiment, null=True, on_delete=models.PROTECT)
 
     def __str__(self):
         return str(self.title)
@@ -47,7 +47,7 @@ class Product(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=500)
     version = models.FloatField()
-    experiment = models.ForeignKey(Experiments, null=True, on_delete=models.PROTECT)
+    experiment = models.ForeignKey(Experiment, null=True, on_delete=models.PROTECT)
 
     def __str__(self):
         return str(self.name)
