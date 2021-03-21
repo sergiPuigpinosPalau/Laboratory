@@ -12,9 +12,12 @@ from phone_field import PhoneField
 
 class Experiments(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=500)
+    description = models.TextField(max_length=500)
     status = models.CharField(max_length=30)
     init_date = models.DateField()
+
+    def __str__(self):
+        return str(self.name)
 
 
 class Scientist(models.Model):
@@ -25,15 +28,26 @@ class Scientist(models.Model):
     birth_date = models.DateField()
     position = models.CharField(max_length=30)
 
+    def __str__(self):
+        return str(self.name)
+
 
 class Article(models.Model):
     title = models.CharField(max_length=50)
     publish_date = models.DateField()
-    body = models.CharField(max_length=500)
+    body = models.TextField(max_length=500)
     author = models.CharField(max_length=50)
+    experiment = models.ForeignKey(Experiments, null=True, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return str(self.title)
 
 
 class Product(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=500)
+    description = models.TextField(max_length=500)
     version = models.FloatField()
+    experiment = models.ForeignKey(Experiments, null=True, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return str(self.name)

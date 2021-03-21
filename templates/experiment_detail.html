@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>
+        {{ experiments.name }}
+    </h1>
+    <h2>Description</h2>
+    <p>
+        {{ experiments.description }}
+    </p>
+    <h2>Products Released</h2>
+    <ul>
+        {% for product in experiments.product_set.all %}
+            <li>
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <p>Version {{ product.version }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+    <h2>News/Updates related to this experiment</h2>
+    <ul>
+        {% for article in experiments.article_set.all %}
+            <li>
+                <h3>{{ article.title }}</h3>
+                <p>{{ article.body }}</p>
+                <p>Publish Date {{ article.version }}</p>
+                <p>Author {{ article.author }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+{% block footer %}
+{% endblock %}
