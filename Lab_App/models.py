@@ -44,6 +44,7 @@ class Article(models.Model):
         return str(self.title)
 
 
+
 class Product(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=500)

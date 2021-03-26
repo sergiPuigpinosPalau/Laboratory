@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>
+        Experiments
+
+    </h1>
+    <ul>
+        {% for experiment in exp_list_obj %}
+            <li><a href="{% url 'Lab_App:experiment_details' experiment.id %}">
+                {{ experiment.name }}</a></li>
+        {% empty %}
+            <li>Sorry, no experiments registered yet.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
