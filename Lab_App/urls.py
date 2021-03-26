@@ -12,7 +12,8 @@ app_name = "Lab_App"
 urlpatterns = [
     #path('experiments', views.experiments_page),
 
-    url(r'^$', ListView.as_view(queryset=Experiment.objects.all().order_by('-init_date'),  #Query to get all experiments
+    #Experiment List
+    url(r'^experiments/$', ListView.as_view(queryset=Experiment.objects.all().order_by('-init_date'),  #Query to get all experiments
                          context_object_name='exp_list_obj',  #variable where is stored
                          template_name='experiment_list.html')),
 

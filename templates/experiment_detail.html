@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>
-        {{ experiments.name }}
+        {{ experiment.name }}
     </h1>
     <h2>Description</h2>
     <p>
-        {{ experiments.description }}
+        {{ experiment.description }}
     </p>
     <h2>Products Released</h2>
     <ul>
-        {% for product in experiments.product_set.all %}
+        {% for product in experiment.product_set.all %}
             <li>
                 <h3>{{ product.name }}</h3>
                 <p>{{ product.description }}</p>
@@ -19,7 +19,7 @@
     </ul>
     <h2>News/Updates related to this experiment</h2>
     <ul>
-        {% for article in experiments.article_set.all %}
+        {% for article in experiment.article_set.all %}
             <li>
                 <h3>{{ article.title }}</h3>
                 <p>{{ article.body }}</p>
