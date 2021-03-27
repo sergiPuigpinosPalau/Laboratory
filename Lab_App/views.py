@@ -1,8 +1,9 @@
 from django.http import HttpResponse
+from django.template import loader
 from django.views.generic import DetailView
 
-from .models import Experiment
 
+from Lab_App.models import *
 
 # Create your views here.
 def experiments_page(r):
@@ -15,8 +16,13 @@ class ExperimentDetail(DetailView):
     model = Experiment
     template_name = 'experiment_detail.html'
 
-    def get_context_data(self, **kwargs):
 
-        context = super(ExperimentDetail, self).get_context_data(**kwargs)
-        #context['RATING_CHOICES'] = RestaurantReview.RATING_CHOICES
-        return context
+def lab_home(request):
+    article_list = Article.objects.order_by('-publish_date')
+    scientist_list = Scientist.objects.order_by('-name')
+    template = loader.get_template('laboratory_home.html')
+    context = {
+        'article_list': article_list,
+        'scientist_list': scientist_list,
+    }
+    return HttpResponse(template.render(context, request))
