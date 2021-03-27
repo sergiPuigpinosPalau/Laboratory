@@ -7,6 +7,7 @@ from django.views.generic import DetailView, CreateView
 from Lab_App.forms import ArticleForm
 from Lab_App.models import *
 
+
 # Create your views here.
 def experiments_page(r):
     experiments = Experiment.objects.order_by('pk')
@@ -41,5 +42,4 @@ class CreateArticle(CreateView):
         return super(CreateArticle, self).form_valid(form)
 
     def get_success_url(self):
-        experiment = self.get_object(Experiment)
-        return HttpResponseRedirect(reverse('Lab_App:experiment_details', args=self.object.id))
+        return reverse('Lab_App:experiment_details', kwargs={"pk": self.kwargs['pk']})
