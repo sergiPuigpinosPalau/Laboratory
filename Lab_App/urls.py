@@ -7,9 +7,11 @@ from Lab_App.views import *
 app_name = "Lab_App"
 
 urlpatterns = [
-    # path('experiments', views.experiments_page),
-
+    #Home
     path('', lab_home, name='home'),
+
+    #Add article
+    url(r'^experiments/(?P<pk>\d+)/articles/create/$', CreateArticle.as_view(), name='create_article'),
 
     # Experiment List
     url(r'^experiments/$',

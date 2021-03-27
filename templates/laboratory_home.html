@@ -17,10 +17,12 @@
     </table>
     <h2>News and Articles</h2>
     {% for article in article_list %}
+        <br>
         <h3>{{ article.title }}</h3>
+        <h4>From:  {{ article.experiment }}</h4>
         <p>{{ article.body }}</p>
-        <p>Publish Date {{ article.version }}</p>
-        <p>Author {{ article.author }}</p>
+        <p>Publish Date:  {{ article.publish_date }}</p>
+        <p>Author:  {{ article.author }}</p>
     {% endfor %}
 </body>
 </html>

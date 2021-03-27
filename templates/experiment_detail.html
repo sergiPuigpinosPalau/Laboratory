@@ -18,12 +18,13 @@
         {% endfor %}
     </ul>
     <h2>News/Updates related to this experiment</h2>
+    <a href="{% url 'Lab_App:create_article' experiment.id %}"> Create Article</a>
     <ul>
         {% for article in experiment.article_set.all %}
             <li>
                 <h3>{{ article.title }}</h3>
                 <p>{{ article.body }}</p>
-                <p>Publish Date {{ article.version }}</p>
+                <p>Publish Date {{ article.publish_date }}</p>
                 <p>Author {{ article.author }}</p>
             </li>
         {% endfor %}
