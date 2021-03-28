@@ -135,3 +135,5 @@ REST_FRAMEWORK = {
     ]
 }
 
+AUTH_USER_MODEL = 'Lab_App.User'
+

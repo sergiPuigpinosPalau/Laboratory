@@ -18,7 +18,8 @@ class User(AbstractUser):
 
 
 class Administrator(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='Administrator_profile')
+    #user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='Administrator_profile')
+    pass
 
 
 class Experiment(models.Model):
@@ -32,7 +33,7 @@ class Experiment(models.Model):
 
 
 class Scientist(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='Scientist_profile')
+    #user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='Scientist_profile')
     name = models.CharField(max_length=50)
     phone_numb = PhoneField(blank=True, help_text='Contact phone number')
     city = models.CharField(max_length=100)
