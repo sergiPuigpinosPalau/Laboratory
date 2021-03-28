@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from phone_field import PhoneField
@@ -10,6 +11,16 @@ from phone_field import PhoneField
 # python manage.py migrate   --  uses function to transform the python table to sql
 # or tools>manage.py
 
+
+class User(AbstractUser):
+    USER_TYPE_CHOICES = [('SC', 'Scientist'), ('ADM', 'Admin'), ]
+    user_type = USER_TYPE_CHOICES
+
+
+class Administrator(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='Administrator_profile')
+
+
 class Experiment(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=500)
@@ -21,6 +32,7 @@ class Experiment(models.Model):
 
 
 class Scientist(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='Scientist_profile')
     name = models.CharField(max_length=50)
     phone_numb = PhoneField(blank=True, help_text='Contact phone number')
     city = models.CharField(max_length=100)
@@ -42,7 +54,6 @@ class Article(models.Model):
 
     def __str__(self):
         return str(self.title)
-
 
 
 class Product(models.Model):
