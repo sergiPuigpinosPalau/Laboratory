@@ -6,8 +6,12 @@ from rest_framework.response import Response
 
 from Lab_App.models import *
 
-CLIENT_ID = 'A3whkgeQcyoLzHtC2uszlcmu1MSbLmBuTiKlB5Um'
-CLIENT_SECRET = 'bqJWKp03ZeiIu7FjsLYet7OgLK7gWhI3MB1GcSs0qshVZEoLfVJDZuy8K94lMT5hBd521hVI8ntEyVmgHrETMQghdS9h31gVJtso2VqVmyDLJgRCgzl0mBOj4ewgFvi1'
+#http://127.0.0.1:8000/o/applications/
+#Client Type: confidential
+#Authorization Grant Type: Resource owner password-based
+
+CLIENT_ID = 'I40hEY7Zjowd7MixysIcWSlmjvDeCt2yQCGKQq6J'
+CLIENT_SECRET = 'Y4Q8E3EGPQFBgHdcICR5n6JDgm9s5vaopwbQMKEDbH9l393AIi2Yr3RgoL3J03Jd9olvQBm5Wnrh3GF0GMdOqEWj3J1PvRGAIy8Wy2uOfhRrWp1giZLbBOeoszM13VzO'
 
 
 @api_view(['POST'])
