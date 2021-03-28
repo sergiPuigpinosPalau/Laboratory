@@ -41,7 +41,7 @@ class Scientist(models.Model):
     email = models.EmailField(max_length=254)
     birth_date = models.DateField()
     position = models.CharField(max_length=30)
-    experiment = models.ForeignKey(Experiment, null=True, on_delete=models.PROTECT)
+    experiment = models.ForeignKey(Experiment, null=True, on_delete=models.PROTECT, related_name='presentInExperiment')
 
     def __str__(self):
         return str(self.name)
