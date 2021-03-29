@@ -38,15 +38,18 @@ class CreateArticle(CreateView):
     template_name = 'form.html'
     form_class = ArticleForm
 
+
     def get_form_kwargs(self):
         kwargs = super(CreateArticle, self).get_form_kwargs()
         kwargs['experimentpk'] = self.kwargs['pk']
         return kwargs
 
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.instance.experiment = Experiment.objects.get(id=self.kwargs['pk'])
         return super(CreateArticle, self).form_valid(form)
+
 
     def get_success_url(self):
         return reverse('Lab_App:experiment_details', kwargs={"pk": self.kwargs['pk']})

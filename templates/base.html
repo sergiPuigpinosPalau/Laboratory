@@ -14,8 +14,9 @@
     {% block sidebar %}
         <ul>
             <li><a href="/">Home</a></li>
-             <li><a href="{% url 'Lab_App:signup' %}"> Sign up</a></li>
+             <li><a href="{% url 'Lab_App:signup' %}"> Create an account</a></li>
             <li><a href="{% url 'Lab_App:experiments' %}"> Experiments </a></li>
+            <li><a href="{% url 'rest_framework:logout' %}"> Log out </a></li>
         </ul>{% endblock %}
 </div>
 <div id="content">
