@@ -14,7 +14,7 @@ from phone_field import PhoneField
 
 
 class User(AbstractUser):
-    USER_TYPE_CHOICES = [('SC', 'Scientist'), ('ADM', 'Admin'), ]
+    USER_TYPE_CHOICES = [('scientist', 'Scientist'), ('admin', 'Administrator'), ]
     user_type = USER_TYPE_CHOICES
 
 
@@ -39,7 +39,7 @@ class Scientist(models.Model):
     phone_numb = PhoneField(blank=True, help_text='Contact phone number')
     city = models.CharField(max_length=100)
     email = models.EmailField(max_length=254)
-    birth_date = models.DateField()
+    birth_date = models.DateField(null=True)
     position = models.CharField(max_length=30)
     experiment = models.ForeignKey(Experiment, null=True, on_delete=models.PROTECT, related_name='presentInExperiment')
 

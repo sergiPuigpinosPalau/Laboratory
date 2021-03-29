@@ -1,10 +1,11 @@
+from django.contrib.auth import login
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.template import loader
 from django.urls import reverse
 from django.views.generic import DetailView, CreateView
 
-from Lab_App.forms import ArticleForm
+from Lab_App.forms import ArticleForm, ScientistSignUpForm
 from Lab_App.models import *
 
 
@@ -48,3 +49,18 @@ class CreateArticle(CreateView):
 
     def get_success_url(self):
         return reverse('Lab_App:experiment_details', kwargs={"pk": self.kwargs['pk']})
+
+
+class ScientistSignUpView(CreateView):
+    model = User
+    form_class = ScientistSignUpForm
+    template_name = 'form.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'scientist'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('Lab_App:home')

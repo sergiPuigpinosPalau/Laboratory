@@ -22,9 +22,9 @@ urlpatterns = [
     # Experiment details
     url(r'^experiments/(?P<pk>\d+)/$', ExperimentDetail.as_view(), name='experiment_details'),
 
-    #path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     #path('accounts/signup/', SignUpView.as_view(), name='signup'),
-    #path('accounts/signup/student/', ScientistSignUpView.as_view(), name='scientist_signup'),
+    path('accounts/signup/scientist/', ScientistSignUpView.as_view(), name='scientist_signup'),
     #path('accounts/signup/teacher/', AdministratorSignUpView.as_view(), name='administrator_signup'),
 
 ]
