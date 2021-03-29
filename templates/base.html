@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="{% static "style/base.css" %}"/>
+    <!--<link rel="stylesheet" href="{% static "style/base.css" %}"/>-->
     <title>{% block title %}Aperture Science Enrichment Center{% endblock %}</title>
 </head>
 <body>
@@ -15,6 +15,7 @@
         <ul>
             <li><a href="/">Home</a></li>
              <li><a href="{% url 'Lab_App:signup' %}"> Sign up</a></li>
+            <li><a href="{% url 'Lab_App:experiments' %}"> Experiments </a></li>
         </ul>{% endblock %}
 </div>
 <div id="content">

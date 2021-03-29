@@ -1,4 +1,5 @@
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
 from django.template import loader
@@ -20,7 +21,7 @@ class ExperimentDetail(DetailView):
     model = Experiment
     template_name = 'experiment_detail.html'
 
-
+@login_required
 def lab_home(request):
     article_list = Article.objects.order_by('-publish_date')
     scientist_list = Scientist.objects.order_by('-name')
