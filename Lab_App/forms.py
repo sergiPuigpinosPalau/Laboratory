@@ -1,7 +1,9 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from django.forms import ModelForm
+from django import forms
 
+import Lab_App
 from Lab_App.models import *
 
 
@@ -18,7 +20,10 @@ class ArticleForm(ModelForm):
         exclude = ('user', 'date', 'experiment',)
 
 
-class ScientistSignUpForm(UserCreationForm):
+class SignUpForm(UserCreationForm):
+
+    user_type = forms.CharField(label='Type of account: ', widget=forms.Select(choices=User.USER_TYPE_CHOICES))
+    name = forms.CharField()
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -26,7 +31,14 @@ class ScientistSignUpForm(UserCreationForm):
     @transaction.atomic
     def save(self):
         user = super().save(commit=False)
-        user.user_type = 'scientist'
+        user.user_type = self.cleaned_data.get('user_type')
         user.save()
-        Scientist.objects.create(user=user)     #Create associated Model
+        if user.user_type == 'scientist':
+            scientist = Scientist.objects.create(user=user)     #Create associated Model
+            scientist.name = self.cleaned_data.get('name')
+            scientist.save()
+        elif user.user_type == 'admin':
+            admin = Administrator.objects.create(user=user)     #Create associated Model
+            admin.name = self.cleaned_data.get('name')
+            admin.save()
         return user

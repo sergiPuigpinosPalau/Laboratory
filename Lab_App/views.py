@@ -5,7 +5,7 @@ from django.template import loader
 from django.urls import reverse
 from django.views.generic import DetailView, CreateView
 
-from Lab_App.forms import ArticleForm, ScientistSignUpForm
+from Lab_App.forms import ArticleForm, SignUpForm
 from Lab_App.models import *
 
 
@@ -51,14 +51,17 @@ class CreateArticle(CreateView):
         return reverse('Lab_App:experiment_details', kwargs={"pk": self.kwargs['pk']})
 
 
-class ScientistSignUpView(CreateView):
+class SignUpView(CreateView):
     model = User
-    form_class = ScientistSignUpForm
+    form_class = SignUpForm
     template_name = 'form.html'
 
-    def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'scientist'
-        return super().get_context_data(**kwargs)
+    # In case you want to create specific sign ups / function to pass data to the form
+    #
+    # def get_context_data(self, **kwargs):
+    #     kwargs['user_type'] = 'scientist'
+    #     return super().get_context_data(**kwargs)
+    #     pass
 
     def form_valid(self, form):
         user = form.save()

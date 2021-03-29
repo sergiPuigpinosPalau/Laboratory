@@ -20,6 +20,7 @@ class User(AbstractUser):
 
 class Administrator(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='Administrator_profile')
+    name = models.CharField(max_length=50, null=True)
     pass
 
 
