@@ -1,5 +1,54 @@
 {% extends "base.html" %}
 {% block content %}
+    <script>
+        $(function () {
+            $("#Scientists").autocomplete({
+                source: '{% url "Lab_App:autocomplete" %}'
+            });
+        });
+    </script>
+
+  <script>
+    $(function() {
+      $("#Language").autocomplete({
+        source: function(request, response) {
+          $.ajax({
+            url: "https://translation.googleapis.com/language/translate/v2/languages",
+            dataType: "json",
+            data: {
+              nameStartsWith: request.term,
+              limit: 10,
+              apikey: "c71fcda3efd3a3e67d4b1878e138afe0"
+            },
+            success: function(data) {
+              console.log(data);
+              response($.map(data.data.results, function(item) {
+                return {
+                  label: item.name,
+                  value: item.name
+                }
+              }));
+            }
+          });
+        },
+        minLength: 5,
+        select: function(event, ui) {
+          if (ui.item) {}
+        }
+      });
+    });
+  </script>
+
+    <div class="ui-widget">
+        <label for="Scientists">Scientists: </label>
+        <input id="Scientists">
+    </div>
+
+    <div class="ui-widget">
+        <label for="Language">Language: </label>
+        <input id="Language">
+    </div>
+
     <h1 align="center">APERTURE SCIENCE</h1>
     <h2>Science Team</h2>
     <table style="width:50%">
@@ -13,11 +62,12 @@
     {% for article in article_list %}
         <br>
         <h3>{{ article.title }}</h3>
-        <h4>From:  {{ article.experiment }}</h4>
+        <h4>From: {{ article.experiment }}</h4>
         <p>{{ article.body }}</p>
-        <p>Publish Date:  {{ article.publish_date }}</p>
-        <p>Author:  {{ article.author }}</p>
+        <p>Publish Date: {{ article.publish_date }}</p>
+        <p>Author: {{ article.author }}</p>
     {% endfor %}
+
 {% endblock %}
 {% block footer %}
 {% endblock %}

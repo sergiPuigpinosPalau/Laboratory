@@ -22,6 +22,7 @@ urlpatterns = [
     # Experiment details
     url(r'^experiments/(?P<pk>\d+)/$', login_required(ExperimentDetail.as_view()), name='experiment_details'),
 
+    path('autocomplete/', autocomplete, name='autocomplete'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', login_required(SignUpView.as_view()), name='signup'),
 

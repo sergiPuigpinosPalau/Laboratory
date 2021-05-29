@@ -1,6 +1,6 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.template import loader
 from django.urls import reverse
@@ -16,6 +16,14 @@ def experiments_page(r):
     list_experiments = ", ".join([experiment.name for experiment in experiments])
     return HttpResponse(list_experiments)
 
+def autocomplete(request):
+    if "term" in request.GET:
+        scientistqr = Scientist.objects.filter(name__istartswith=request.GET.get('term'))
+        scientist_list = list()
+        for scientist in scientistqr:
+            scientist_list.append(scientist.name)
+        return JsonResponse(scientist_list, safe=False)
+    print("bruh")
 
 class ExperimentDetail(DetailView):
     model = Experiment
